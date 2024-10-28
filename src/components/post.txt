@@ -1,0 +1,22 @@
+    {/* {posts.map((post) => (
+            <li key={post.id} className={styles.postItem}>
+              <h3>{post.description}</h3>
+              <p>Категория: {post.category}</p>
+              {isAdmin && (
+                <div className={styles.buttonContainer}>
+                  <button
+                    onClick={() => handleDelete(post.id)}
+                    className={`${styles.button} ${styles.deleteButton}`}
+                  >
+                    Удалить
+                  </button>
+                  <button
+                    onClick={() => handleEdit(post)}
+                    className={`${styles.button} ${styles.editButton}`}
+                  >
+                    Редактировать
+                  </button>
+                </div>
+              )}
+            </li>
+          ))} */}

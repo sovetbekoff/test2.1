@@ -1,0 +1,43 @@
+/* PostForm.module.css */
+.formContainer {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    margin-bottom: 20px;
+    background-color: #e9f7ef;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formField {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .formField input,
+  .formField button {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .formField input {
+    margin-top: 5px;
+  }
+  
+  .submitButton {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submitButton:hover {
+    background-color: #0056b3;
+  }
+  

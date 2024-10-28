@@ -1,0 +1,32 @@
+/* Navbar.css */
+
+nav {
+    display: flex;
+    justify-content: space-between; /* Разделяет элементы между краями */
+    align-items: center; /* Выравнивает элементы по центру */
+    background-color: black; /* Цвет фона навигации */
+    padding: 10px 20px; /* Отступы внутри навигации */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Тень для навигации */
+  }
+  
+  nav a {
+    text-decoration: none; /* Убирает подчеркивание */
+  }
+  
+  button {
+    background-color: #ff7f50; /* Цвет кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none;
+    padding: 10px 15px; /* Устанавливаем одинаковые отступы */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Эффект наведения */
+    flex: 1; /* Заставляет кнопки занимать одинаковое пространство */
+    margin: 0 5px; /* Отступы между кнопками */
+    font-size: 16px; /* Размер шрифта */
+  }
+  
+  button:hover {
+    background-color: darkorange; /* Цвет при наведении */
+  }
+  
