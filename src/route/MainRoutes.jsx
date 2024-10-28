@@ -5,14 +5,13 @@ import PostForm from "../components/PostForm";
 import PostDetails from "../components/PostDetails";
 import FavoritesPage from "../components/FavoritesPage";
 
-const MainRoutes = ({isAdmin}) => {
+const MainRoutes = ({ isAdmin }) => {
   return (
     <Routes>
       <Route path="/posts" element={<PostList isAdmin={isAdmin} />} />
       <Route path="/add" element={<PostForm />} />
       <Route path="/posts/:postId" element={<PostDetails />} />
       <Route path="/favorites" element={<FavoritesPage />} />
-
     </Routes>
   );
 };

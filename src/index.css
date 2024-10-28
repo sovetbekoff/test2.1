@@ -17,7 +17,9 @@ body {
 }
 
 /* Стили для заголовков */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: var(--black);
 }
 
@@ -27,6 +29,7 @@ button {
   color: var(--white);
   border: none;
   padding: 10px 20px;
+  margin: 1px 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
