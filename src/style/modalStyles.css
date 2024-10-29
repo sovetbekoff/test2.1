@@ -9,44 +9,66 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
-  z-index: 1000; /* Поверх всех элементов */
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
 .modal-content {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  max-width: 400px; /* Максимальная ширина модального окна */
-  width: 100%; /* Ширина 100% для мобильных устройств */
+  max-width: 300px; /* Уменьшаем ширину */
+  width: 90%; /* Адаптивная ширина для мобильных */
+  box-sizing: border-box;
+  text-align: center;
 }
 
 h3 {
-  color: #000; /* Цвет заголовка */
+  color: #000;
   margin-bottom: 15px;
+  font-size: 1.2em;
 }
 
 input[type="password"] {
   width: 100%;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 15px; /* Отступ между полем и кнопкой */
+  margin-bottom: 15px;
+  font-size: 0.9em;
 }
 
 button {
-  background-color: #ff7f50; /* Цвет кнопки */
-  color: white; /* Цвет текста кнопки */
-  /* border: none ; */
+  background-color: #ff7f50;
+  color: white;
   border: 1px solid #000 !important;
-  padding: 10px;
+  padding: 8px;
   border-radius: 5px;
   cursor: pointer;
-  width: 100%; /* Кнопка на всю ширину */
-  transition: background-color 0.3s; /* Эффект наведения */
+  width: 100%;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: darkorange; /* Цвет при наведении */
+  background-color: darkorange;
+}
+
+/* Дополнительная стилизация для мобильных устройств */
+@media (max-width: 319px) {
+  .modal-content {
+    padding: 15px;
+    max-width: 200px; /* Уменьшаем ширину на маленьких экранах */
+  }
+
+  h3 {
+    font-size: 1em;
+  }
+
+  input[type="password"],
+  button {
+    font-size: 0.85em;
+    padding: 7px;
+  }
 }

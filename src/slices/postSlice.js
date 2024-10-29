@@ -78,24 +78,44 @@ export const deletePost = createAsyncThunk("posts/deletePost", async (id) => {
 });
 
 // Асинхронное действие для добавления комментария
+// export const addComment = createAsyncThunk(
+//   "posts/addComment",
+//   async ({ postId, comment }) => {
+//     const commentsRef = collection(doc(firestore, "posts", postId), "comments");
+//     const commentDoc = await addDoc(commentsRef, {
+//       text: comment,
+//       createdAt: new Date().toISOString(),
+//     });
+//     return {
+//       postId,
+//       id: commentDoc.id,
+//       text: comment,
+//       createdAt: commentDoc.data().createdAt,
+//     };
+//   }
+// );
 export const addComment = createAsyncThunk(
   "posts/addComment",
   async ({ postId, comment }) => {
     const commentsRef = collection(doc(firestore, "posts", postId), "comments");
+    const createdAt = new Date().toISOString(); // Устанавливаем время создания
+
     const commentDoc = await addDoc(commentsRef, {
       text: comment,
-      createdAt: new Date().toISOString(),
+      createdAt: createdAt, // Добавляем createdAt в Firestore
     });
+
+    // Возвращаем данные вместе с новым значением createdAt
     return {
       postId,
       id: commentDoc.id,
       text: comment,
-      createdAt: commentDoc.data().createdAt,
+      createdAt, // Передаем createdAt из локальной переменной
     };
   }
 );
 
-// Получение комментариев
+ 
 // Получение комментариев
 export const fetchComments = createAsyncThunk(
   "posts/fetchComments",
@@ -106,6 +126,23 @@ export const fetchComments = createAsyncThunk(
   }
 );
 
+export const editComment = createAsyncThunk(
+  "posts/editComment",
+  async ({ postId, commentId, newText }) => {
+    const commentRef = doc(firestore, "posts", postId, "comments", commentId);
+    await updateDoc(commentRef, { text: newText });
+    return { postId, commentId, newText };
+  }
+);
+
+export const deleteComment = createAsyncThunk(
+  "posts/deleteComment",
+  async ({ postId, commentId }) => {
+    const commentRef = doc(firestore, "posts", postId, "comments", commentId);
+    await deleteDoc(commentRef);
+    return { postId, commentId };
+  }
+);
 const postsSlice = createSlice({
   name: "posts",
   initialState: { posts: [], status: null, comments: {} },
@@ -142,6 +179,14 @@ const postsSlice = createSlice({
       .addCase(fetchComments.fulfilled, (state, action) => {
         const postId = action.meta.arg; // postId, переданный в аргументе
         state.comments[postId] = action.payload; // Сохраняем комментарии по postId
+      }) .addCase(editComment.fulfilled, (state, action) => {
+        const { postId, commentId, newText } = action.payload;
+        const comment = state.comments[postId].find(c => c.id === commentId);
+        if (comment) comment.text = newText;
+      })
+      .addCase(deleteComment.fulfilled, (state, action) => {
+        const { postId, commentId } = action.payload;
+        state.comments[postId] = state.comments[postId].filter(c => c.id !== commentId);
       });
   },
 });

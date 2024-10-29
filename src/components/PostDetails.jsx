@@ -1,76 +1,20 @@
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import { useSelector, useDispatch } from "react-redux";
-// import { addComment, fetchComments } from "../slices/postSlice"; // Импортируйте асинхронное действие
-// import styles from "../style/PostDetails.module.css";
-
-// const PostDetails = () => {
-//   const { postId } = useParams();
-//   const [newComment, setNewComment] = useState("");
-
-//   const dispatch = useDispatch();
-//   const post = useSelector((state) =>
-//     state.posts.posts.find((p) => p.id === postId)
-//   );
-//   const comments = useSelector((state) => state.posts.comments[postId] || []);
-
-//   const handleAddComment = () => {
-//     dispatch(addComment({ postId, comment: newComment }));
-//     setNewComment(""); // Очищаем поле ввода
-//   };
-
-//   useEffect(() => {
-//     if (postId) {
-//       dispatch(fetchComments(postId)); // Получаем комментарии при монтировании компонента
-//     }
-//   }, [dispatch, postId]);
-
-//   if (!post) {
-//     return <div>Пост не найден</div>;
-//   }
-//   console.log(comments);
-
-//   return (
-//     <div className={styles.postDetails}>
-//       <h2>{post.description}</h2>
-//       <p>Категория: {post.category}</p>
-//       <p>Опубликовано: {post.timestamp}</p>
-
-//       <h3>Комментарии</h3>
-//       <input
-//         type="text"
-//         value={newComment}
-//         onChange={(e) => setNewComment(e.target.value)}
-//         placeholder="Добавьте комментарий"
-//         required
-//       />
-//       <button onClick={handleAddComment}>Отправить</button>
-
-//       {comments.length > 0 ? (
-//         comments.map((comment) => (
-//           <div key={comment.id} className={styles.comment}>
-//             <p>{comment.text}</p>
-//             <p>Создано: {new Date(comment.createdAt).toLocaleString()}</p>
-//           </div>
-//         ))
-//       ) : (
-//         <p>Нет комментариев</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default PostDetails;
-
+// В PostDetails.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addComment, fetchComments } from "../slices/postSlice"; // Import the async action
+import {
+  addComment,
+  fetchComments,
+  editComment,
+  deleteComment,
+} from "../slices/postSlice";
 import styles from "../style/PostDetails.module.css";
 
-const PostDetails = () => {
+const PostDetails = ({ isAdmin }) => {
   const { postId } = useParams();
   const [newComment, setNewComment] = useState("");
+  const [editText, setEditText] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState(null);
 
   const dispatch = useDispatch();
   const post = useSelector((state) =>
@@ -80,18 +24,24 @@ const PostDetails = () => {
 
   const handleAddComment = () => {
     dispatch(addComment({ postId, comment: newComment }));
-    setNewComment(""); // Clear the input field
+    setNewComment("");
+  };
+
+  const handleEditComment = (commentId) => {
+    dispatch(editComment({ postId, commentId, newText: editText }));
+    setEditingCommentId(null);
+    setEditText("");
+  };
+
+  const handleDeleteComment = (commentId) => {
+    dispatch(deleteComment({ postId, commentId }));
   };
 
   useEffect(() => {
-    if (postId) {
-      dispatch(fetchComments(postId)); // Fetch comments on component mount
-    }
+    if (postId) dispatch(fetchComments(postId));
   }, [dispatch, postId]);
 
-  if (!post) {
-    return <div>Пост не найден</div>;
-  }
+  if (!post) return <div>Пост не найден</div>;
 
   return (
     <div className={styles.postDetails}>
@@ -108,7 +58,7 @@ const PostDetails = () => {
           required
           className={styles.inputField}
         />
-        <button onClick={handleAddComment} className={styles.submitButton}>
+        <button onClick={handleAddComment} className={`${styles.submitButton}`}>
           Отправить
         </button>
       </div>
@@ -116,10 +66,48 @@ const PostDetails = () => {
       {comments.length > 0 ? (
         comments.map((comment) => (
           <div key={comment.id} className={styles.comment}>
-            <p>{comment.text}</p>
-            <p className={styles.commentTimestamp}>
-              Создано: {new Date(comment.createdAt).toLocaleString()}
-            </p>
+            {editingCommentId === comment.id ? (
+              <>
+                <input
+                  type="text"
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                  placeholder="Редактировать комментарий"
+                />
+                <button onClick={() => handleEditComment(comment.id)}>
+                  Сохранить
+                </button>
+                <button onClick={() => setEditingCommentId(null)}>
+                  Отмена
+                </button>
+              </>
+            ) : (
+              <>
+                <p>{comment.text}</p>
+                <p className={styles.commentTimestamp}>
+                  Создано: {new Date(comment.createdAt).toLocaleString()}
+                </p>
+                {isAdmin && (
+                  <div>
+                    <button
+                      onClick={() => {
+                        setEditingCommentId(comment.id);
+                        setEditText(comment.text);
+                      }}
+                      className={styles.editButton}
+                    >
+                      Редактировать
+                    </button>
+                    <button
+                      onClick={() => handleDeleteComment(comment.id)}
+                      className={styles.deleteButton}
+                    >
+                      Удалить
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         ))
       ) : (

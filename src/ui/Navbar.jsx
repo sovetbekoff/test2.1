@@ -7,7 +7,6 @@ const Navbar = ({ setIsAdmin, isAdmin }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
- 
   const handleAdminClick = () => {
     setIsModalOpen(true);
   };
@@ -23,9 +22,9 @@ const Navbar = ({ setIsAdmin, isAdmin }) => {
   return (
     <nav>
       <button onClick={() => navigate("/posts")}>Карточки</button>
-      {isAdmin && (
-        <button onClick={() => navigate("/add")}>Добавить Пост</button>
-      )}
+
+      <button onClick={() => navigate("/add")}>Добавить Пост</button>
+
       <button onClick={handleAdminClick}>Админ</button>
       <button onClick={() => navigate("/favorites")}>fav</button>
       {isModalOpen && (

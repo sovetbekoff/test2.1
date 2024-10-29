@@ -1,0 +1,93 @@
+ /* FavoritesPage.module.css */
+
+.favoritesContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.favoritesContainer h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.favoriteItem {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+}
+
+.favoriteItem:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.emptyMessage {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.clearButton {
+  background-color: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.clearButton:hover {
+  background-color: #c62828;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.detailsButton {
+  background-color: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.detailsButton:hover {
+  background-color: #e67e00;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}

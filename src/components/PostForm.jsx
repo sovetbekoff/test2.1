@@ -4,7 +4,7 @@
 // import styles from "../style/PostForm.module.css";
 // import { useNavigate } from "react-router-dom";
 
-// const PostForm = () => {
+// const PostForm = ({ onClose }) => {
 //   const [description, setDescription] = useState("");
 //   const [category, setCategory] = useState("");
 //   const dispatch = useDispatch();
@@ -21,11 +21,19 @@
 //       setDescription("");
 //       setCategory("");
 //       navigate("/posts");
+//       if (onClose) onClose();
 //     }
 //   };
 
 //   return (
 //     <form onSubmit={handleSubmit} className={styles.formContainer}>
+//       <button
+//         type="button"
+//         onClick={() => navigate("/posts")}
+//         className={styles.closeButton}
+//       >
+//         Закрыть X
+//       </button>
 //       <div className={styles.formField}>
 //         <label>Описание</label>
 //         <input
@@ -78,13 +86,17 @@ const PostForm = ({ onClose }) => {
       setDescription("");
       setCategory("");
       navigate("/posts");
-      if (onClose) onClose(); // Закрыть модальное окно после добавления поста
+      if (onClose) onClose();
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
-      <button type="button" onClick={()=>navigate("/posts")} className={styles.closeButton}>
+      <button
+        type="button"
+        onClick={() => navigate("/posts")}
+        className={styles.closeButton}
+      >
         Закрыть X
       </button>
       <div className={styles.formField}>
@@ -99,13 +111,19 @@ const PostForm = ({ onClose }) => {
       </div>
       <div className={styles.formField}>
         <label>Категория</label>
-        <input
-          type="text"
-          placeholder="Категория"
+        <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           required
-        />
+          className={styles.selectInput}
+        >
+          <option value="">Выберите категорию</option>
+          <option value="anon">Анон</option>
+          <option value="confession">Признание</option>
+          <option value="lost_found">Нашел/Потерял</option>
+          <option value="news">Новости</option>
+        
+        </select>
       </div>
       <button type="submit" className={styles.submitButton}>
         Добавить

@@ -1,70 +1,120 @@
+/* PostDetails.module.css */
+
 .postDetails {
+    max-width: 800px; /* Limit width on larger screens */
+    width: 100%;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    box-sizing: border-box;
+    background-color: #f9f9f9; /* Light background for readability */
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .postTitle {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+}
+
+.postTitle {
+    font-size: 1.8em;
     color: #333;
-  }
-  
-  .postCategory,
-  .postTimestamp {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 15px;
-  }
-  
-  .commentsTitle {
-    font-size: 20px;
-    margin-top: 20px;
     margin-bottom: 10px;
-    color: #444;
-  }
-  
-  .commentInput {
-    display: flex;
-    align-items: center;
+}
+
+.postCategory {
+    font-size: 1em;
+    color: #555;
     margin-bottom: 20px;
-  }
-  
-  .inputField {
-    flex: 1;
+}
+
+.commentsTitle {
+    font-size: 1.5em;
+    margin-top: 30px;
+    color: #333;
+}
+
+.commentInput {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.inputField {
+    width: 100%;
     padding: 10px;
+    font-size: 1em;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+ 
+.comment {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.commentTimestamp {
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* Общие стили для кнопок */
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-right: 5px;
   }
   
+  /* Кнопка добавления комментария */
   .submitButton {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
+    background-color: #ff7f50; /* Оранжевый */
     color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
   }
   
   .submitButton:hover {
-    background-color: #0056b3;
+    background-color: #e76e3e;
   }
   
-  .comment {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
+  /* Кнопка редактирования */
+  .editButton {
+    background-color: #007bff; /* Синий */
+    color: white;
   }
   
-  .commentTimestamp {
-    font-size: 14px;
-    color: #999;
-    margin-top: 5px;
+  .editButton:hover {
+    background-color: #0066cc;
   }
   
+  /* Кнопка удаления */
+  .deleteButton {
+    background-color: #ff4d4f; /* Красный */
+    color: white;
+  }
+  
+  .deleteButton:hover {
+    background-color: #d43f3b;
+  }
+  
+/* Responsive design for smaller screens */
+@media (max-width: 320px) {
+    .postDetails {
+        max-width: 260px;
+        padding: 10px 10px;
+        margin-top: 10px;
+    }
+    .postTitle {
+        font-size: 1.5em;
+    }
+    .commentsTitle {
+        font-size: 1.3em;
+    }
+    .inputField, .submitButton {
+        width: 100%;
+    }
+}

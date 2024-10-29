@@ -10,7 +10,7 @@ const MainRoutes = ({ isAdmin }) => {
     <Routes>
       <Route path="/posts" element={<PostList isAdmin={isAdmin} />} />
       <Route path="/add" element={<PostForm />} />
-      <Route path="/posts/:postId" element={<PostDetails />} />
+      <Route path="/posts/:postId" element={<PostDetails isAdmin={isAdmin} />} />
       <Route path="/favorites" element={<FavoritesPage />} />
     </Routes>
   );
